@@ -17,17 +17,17 @@ class RatingController extends Controller
     public function store(Request $request)
     {
         $validatedData = $request->validate([
-            'assessment' => 'required|numeric|min:1|max:5',  // Coincide con la columna 'assessment' en tu base de datos
-            'review' => 'required|string',                 // Coincide con la columna 'review' en tu base de datos
+            'assessment' => 'required|numeric|min:1|max:5',
+            'review' => 'required|string',
         ]);
     
         $rating = new Rating;
         $rating->assessment = $request->input('assessment');
         $rating->review = $request->input('review');
-        $rating->users_id = auth()->id();  // Asegúrate de usar el nombre correcto de la columna de usuario en tu base de datos
+        $rating->users_id = auth()->id(); // Asigna el ID del usuario autenticado
     
         $rating->save();
     
+        // Redirigir o mostrar un mensaje después de guardar
         return redirect()->route('agradecimiento');
     }}
-    

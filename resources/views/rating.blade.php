@@ -23,17 +23,17 @@
 
     <!-- Formulario para enviar una nueva calificación -->
     <form action="{{ route('admin.rating.store') }}" method="POST">
-        @csrf
-        <div class="form-group">
-            <label for="rating">Calificación:</label>
-            <input type="number" class="form-control" name="rating" min="1" max="5" required>
-        </div>
-        <div class="form-group">
-            <label for="comment">Comentario:</label>
-            <textarea class="form-control" name="comment" rows="4" required></textarea>
-        </div>
-        <button type="submit" class="btn btn-primary">Enviar Calificación</button>
-    </form>
+    @csrf
+    <div class="form-group">
+        <label for="assessment">Calificación:</label>
+        <input type="number" class="form-control" name="assessment" min="1" max="5" required>
+    </div>
+    <div class="form-group">
+        <label for="review">Comentario:</label>
+        <textarea class="form-control" name="review" rows="4" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Enviar Calificación</button>
+</form>
 </div>
 @endsection
 
