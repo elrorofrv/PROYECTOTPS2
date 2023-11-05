@@ -10,23 +10,24 @@ class RatingController extends Controller
 {
     public function index()
     {
-        $ratings = Rating::all(); // Recupera todas las calificaciones
+        $ratings = Rating::all();
         return view('rating', compact('ratings'));
     }
 
     public function store(Request $request)
-{
-    $validatedData = $request->validate([
-        'rating' => 'required|numeric|min:1|max:5',
-        'comment' => 'required|string',
-    ]);
-
-    $rating = new Rating;
-    $rating->user_id = auth()->id(); // Si hay autenticación de usuario
-    $rating->rating = $request->input('rating');
-    $rating->comment = $request->input('comment');
-    $rating->save();
-    $rating->user_id = auth()->id(); // Asegúrate de que el usuario esté autenticado
-
-    return redirect()->route('agradecimiento');
-}}
+    {
+        $validatedData = $request->validate([
+            'assessment' => 'required|numeric|min:1|max:5',  // Coincide con la columna 'assessment' en tu base de datos
+            'review' => 'required|string',                 // Coincide con la columna 'review' en tu base de datos
+        ]);
+    
+        $rating = new Rating;
+        $rating->assessment = $request->input('assessment');
+        $rating->review = $request->input('review');
+        $rating->users_id = auth()->id();  // Asegúrate de usar el nombre correcto de la columna de usuario en tu base de datos
+    
+        $rating->save();
+    
+        return redirect()->route('agradecimiento');
+    }}
+    

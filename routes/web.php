@@ -40,11 +40,14 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 
 
 // Rutas para la calificación
-Route::get('/admin/rating', [RatingController::class, 'index'])->name('admin.rating.index');
-Route::post('/admin/rating', [RatingController::class, 'store'])->name('admin.rating.store');
-
-Route::get('/agradecimiento', function () {
-    return view('agradecimiento'); // Devuelve la vista de agradecimiento
-})->name('agradecimiento');
+Route::group(['middleware' => 'web'], function () {
+    // Rutas de calificación
+    Route::get('/admin/rating', [RatingController::class, 'index'])->name('admin.rating.index');
+    Route::post('/admin/rating', [RatingController::class, 'store'])->name('admin.rating.store');
+    Route::get('/agradecimiento', function () {
+        return view('agradecimiento'); // Devuelve la vista de agradecimiento
+    })->name('agradecimiento');
+    
+});
 
 
